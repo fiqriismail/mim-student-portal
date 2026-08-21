@@ -18,7 +18,7 @@ All backend (ASP.NET Core API) stories for Phase 1, grouped by PRD epic. Prefixe
 
 | Story | Title | Priority | Depends on | Status |
 |---|---|---|---|---|
-| [BE-1.1](./BE-1.1.md) | Self-registration | M | — | Not started |
+| [BE-1.1](./BE-1.1.md) | Self-registration | M | — | Done |
 | [BE-1.2](./BE-1.2.md) | Email verification | M | [BE-1.1](./BE-1.1.md) | Not started |
 | [BE-1.3](./BE-1.3.md) | Login | M | [BE-1.1](./BE-1.1.md), [BE-1.6](./BE-1.6.md) | Not started |
 | [BE-1.4](./BE-1.4.md) | Logout | M | [BE-1.6](./BE-1.6.md) | Not started |
