@@ -41,6 +41,7 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddScoped<IIdentityService, IdentityServiceImpl>();
         services.AddScoped<IStudentReferenceGenerator, StudentReferenceGenerator>();
         services.AddScoped<IRegistrationWriter, RegistrationWriter>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddSingleton(Channel.CreateUnbounded<EmailMessage>());
         services.AddSingleton<IEmailSender, QueuedEmailSender>();
