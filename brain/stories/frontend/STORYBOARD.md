@@ -18,7 +18,7 @@ All frontend (Next.js) stories for Phase 1, grouped by PRD epic. Prefixed `FE-`.
 
 | Story | Title | Priority | Depends on | Status |
 |---|---|---|---|---|
-| [FE-1.1](./FE-1.1.md) | Self-registration | M | [BE-1.1](./BE-1.1.md) | Not started |
+| [FE-1.1](./FE-1.1.md) | Self-registration | M | [BE-1.1](./BE-1.1.md) | Done |
 | [FE-1.2](./FE-1.2.md) | Email verification | M | [BE-1.2](./BE-1.2.md) | Not started |
 | [FE-1.3](./FE-1.3.md) | Login | M | [BE-1.3](./BE-1.3.md) | Not started |
 | [FE-1.4](./FE-1.4.md) | Logout | M | [BE-1.4](./BE-1.4.md) | Not started |
