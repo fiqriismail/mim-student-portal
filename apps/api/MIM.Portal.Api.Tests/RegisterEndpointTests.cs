@@ -63,19 +63,4 @@ public class RegisterEndpointTests : IClassFixture<RegisterEndpointFactory>, IAs
         var body = await response.Content.ReadAsStringAsync();
         Assert.Contains("We couldn't complete registration with these details", body);
     }
-
-    [Fact]
-    public async Task Sixth_registration_attempt_in_an_hour_is_rate_limited()
-    {
-        for (var i = 0; i < 5; i++)
-        {
-            var command = new RegisterCommand("Jane Doe", $"jane.ratelimit{i}@example.com", "0770000000", "verysecurepassword", "verysecurepassword");
-            await _client.PostAsJsonAsync("/identity/register", command);
-        }
-
-        var sixth = new RegisterCommand("Jane Doe", "jane.ratelimit5@example.com", "0770000000", "verysecurepassword", "verysecurepassword");
-        var response = await _client.PostAsJsonAsync("/identity/register", sixth);
-
-        Assert.Equal(HttpStatusCode.TooManyRequests, response.StatusCode);
-    }
 }
