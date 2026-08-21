@@ -5,7 +5,7 @@ layer: backend
 epic: "E0 — Project Setup"
 prd_ref: N/A
 priority: M
-status: not-started
+status: done
 depends_on: []
 ---
 
