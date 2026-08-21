@@ -29,6 +29,16 @@ public class PortalDbContext(DbContextOptions<PortalDbContext> options)
         builder.Entity<IdentityRoleClaim<Guid>>().ToTable("asp_net_role_claims");
         builder.Entity<IdentityUserToken<Guid>>().ToTable("asp_net_user_tokens");
 
+        // ARCHITECTURE.md §7.2 requires the case-insensitive unique-email constraint to be
+        // enforced at the database level, not only in application code. Identity's default
+        // EmailIndex (on normalized_email) is non-unique; today's accidental backstop is
+        // that IdentityServiceImpl sets UserName = email, so the *unique* UserNameIndex
+        // happens to also block duplicate emails. That's fragile - any future story that
+        // sets UserName to something else (a handle, a student reference, ...) would
+        // silently remove email-uniqueness enforcement. Make it explicit and independent
+        // of UserName.
+        builder.Entity<ApplicationUser>().HasIndex(u => u.NormalizedEmail).IsUnique();
+
         builder.HasSequence<long>("student_reference_seq").StartsAt(1);
 
         builder.ApplyConfigurationsFromAssembly(typeof(PortalDbContext).Assembly);

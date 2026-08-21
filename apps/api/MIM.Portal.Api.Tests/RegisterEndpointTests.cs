@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MIM.Portal.Application.Identity.Register;
+using MIM.Portal.Domain;
 using MIM.Portal.Infrastructure.Persistence;
 using Xunit;
 
@@ -49,6 +50,15 @@ public class RegisterEndpointTests : IClassFixture<RegisterEndpointFactory>, IAs
 
         Assert.StartsWith("MIM-", profile.StudentReference);
         Assert.False(string.IsNullOrWhiteSpace(token.TokenHash));
+
+        // AC-1.1.6 / design spec testing section: a freshly registered user must land in
+        // the Student role, PendingVerification status, and carry a verification token
+        // that expires roughly 24 hours out (allow slack for test wall-clock drift).
+        Assert.Equal(UserRole.Student, user.Role);
+        Assert.Equal(UserStatus.PendingVerification, user.Status);
+        Assert.Equal(TokenType.EmailVerification, token.Type);
+        var expiresIn = token.ExpiresAt - DateTime.UtcNow;
+        Assert.InRange(expiresIn, TimeSpan.FromHours(23.9), TimeSpan.FromHours(24.1));
     }
 
     [Fact]

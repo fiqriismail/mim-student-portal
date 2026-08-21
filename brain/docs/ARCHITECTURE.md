@@ -75,9 +75,9 @@ apps/api/
 └── MIM.Portal.Api/               # Minimal API endpoints, DI composition root, middleware
 ```
 
-- **Domain**: `User`, `StudentProfile`, `Course`, `Batch`, `Enrolment`, `AuditLog`, `Token` (PRD §6.1), plus invariants as domain methods (e.g. `Batch.TryReserveSeat()`, `Enrolment.Withdraw()`). No EF Core or ASP.NET references.
+- **Domain**: `StudentProfile`, `Course`, `Batch`, `Enrolment`, `AuditLog`, `Token` (PRD §6.1), plus invariants as domain methods (e.g. `Batch.TryReserveSeat()`, `Enrolment.Withdraw()`). No EF Core or ASP.NET references. There is no `User` type in Domain — the user/credential record itself is `ApplicationUser`, owned entirely by Infrastructure (see below and §6.3); Domain only ever refers to a user by its `Guid` id (e.g. `StudentProfile.UserId`, `Token.UserId`).
 - **Application**: business logic, one folder per **feature slice**, not per technical concern. No repository-per-entity abstraction sprawl — each slice owns exactly the query/command it needs.
-- **Infrastructure**: `PortalDbContext` (EF Core), migrations, `IEmailSender`, `IClock`, `IAuditWriter`, rate-limiting store.
+- **Infrastructure**: `PortalDbContext` (EF Core), migrations, `ApplicationUser` (ASP.NET Identity's user/credential record — see §6.3, confined entirely to this layer and never referenced from Domain or Application), `IEmailSender`, `IClock`, `IAuditWriter`, rate-limiting store.
 - **Api**: endpoint groups (`MapGroup`), request/response DTOs, auth/CSRF middleware, problem-details error mapping, OpenAPI.
 
 ### 4.2 Vertical slices inside Application
@@ -173,7 +173,9 @@ Cross-origin cookie auth (Next.js on one origin, API on another) forces `SameSit
 
 ### 6.3 Identity implementation
 
-ASP.NET Identity (or a slim custom identity layer over EF Core, given the constrained field set in PRD §6.1) handles password hashing (Argon2id via a custom `IPasswordHasher`, since ASP.NET Identity defaults to PBKDF2 — §8.3 requires a memory-hard algorithm), lockout/backoff (AC-1.3.3), and token issuance for email verification and password reset (`Token` entity, §6.1).
+Resolved during BE-1.1 (AD-4, §11): ASP.NET Identity, confined entirely to `Infrastructure`. The user/credential record is `ApplicationUser` (`Infrastructure/Identity/ApplicationUser.cs`), an `IdentityUser<Guid>` subtype carrying the extra PRD §6.1 fields (`FullName`, `Phone`, `Role`, `Status`); it never leaks into Domain or Application — those layers depend only on `IIdentityService` and refer to a user solely by its `Guid` id. Domain's own `StudentProfile` and `Token` entities hold the PRD-specific, non-Identity data (student reference, verification/reset tokens) and link back to `ApplicationUser` by that same id.
+
+ASP.NET Identity handles password hashing (Argon2id via a custom `IPasswordHasher<ApplicationUser>`, since ASP.NET Identity defaults to PBKDF2 — §8.3 requires a memory-hard algorithm), lockout/backoff (AC-1.3.3), and case-insensitive unique-email enforcement (`RequireUniqueEmail`, backstopped at the database level per §7.2). Token issuance for email verification and password reset uses the Domain `Token` entity (§6.1), not Identity's own token providers.
 
 ---
 
