@@ -12,7 +12,7 @@ All frontend (Next.js) stories for Phase 1, grouped by PRD epic. Prefixed `FE-`.
 
 | Story | Title | Priority | Depends on | Status |
 |---|---|---|---|---|
-| [FE-0.1](./FE-0.1.md) | Scaffold frontend app & workspace tooling | M | — | Not started |
+| [FE-0.1](./FE-0.1.md) | Scaffold frontend app & workspace tooling | M | — | Done |
 
 ### E1 — Account & Identity
 
