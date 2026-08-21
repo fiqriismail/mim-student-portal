@@ -12,7 +12,7 @@ All backend (ASP.NET Core API) stories for Phase 1, grouped by PRD epic. Prefixe
 
 | Story | Title | Priority | Depends on | Status |
 |---|---|---|---|---|
-| [BE-0.1](./BE-0.1.md) | Scaffold backend solution | M | — | Not started |
+| [BE-0.1](./BE-0.1.md) | Scaffold backend solution | M | — | Done |
 
 ### E1 — Account & Identity
 

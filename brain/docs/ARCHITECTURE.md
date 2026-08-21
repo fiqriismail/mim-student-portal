@@ -68,7 +68,7 @@ The browser talks **only** to Next.js. Next.js is a Backend-for-Frontend (BFF): 
 ### 4.1 Layers
 
 ```
-src/backend/
+apps/api/
 ├── MIM.Portal.Domain/            # Entities, value objects, domain events, no dependencies
 ├── MIM.Portal.Application/       # Use cases, organised as vertical slices (see 4.2)
 ├── MIM.Portal.Infrastructure/    # EF Core, email provider, rate limiter, clock, audit sink
@@ -124,7 +124,7 @@ Clean Architecture's layering enforces the PRD's non-negotiable rule at AC-7.1.2
 ### 5.1 Structure (vertical slice per PRD epic)
 
 ```
-src/frontend/
+apps/web/
 ├── app/
 │   ├── (public)/
 │   │   ├── catalog/                # US-3.1, US-3.2
