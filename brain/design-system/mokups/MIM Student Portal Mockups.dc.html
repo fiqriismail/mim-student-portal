@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap">
+<style>
+  body{margin:0;font-family:'Roboto',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:#335d99;}
+  a:hover{color:#264673;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#e9eaec;">
+
+  <div style="position:sticky;top:0;z-index:10;background:#f4f5f7;border-bottom:1px solid #dcdfe3;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:12px;font-weight:600;color:#6b7280;margin-right:8px;text-transform:uppercase;letter-spacing:.04em;">Screen</span>
+      <button onClick="{{goHome}}" style="{{tabHomeStyle}}">Home</button>
+      <button onClick="{{goCourse}}" style="{{tabCourseStyle}}">Course detail</button>
+      <button onClick="{{goRegister}}" style="{{tabRegisterStyle}}">Register</button>
+      <button onClick="{{goVerify}}" style="{{tabVerifyStyle}}">Check email</button>
+      <button onClick="{{goLogin}}" style="{{tabLoginStyle}}">Login</button>
+      <button onClick="{{goDashboard}}" style="{{tabDashboardStyle}}">Dashboard</button>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;">
+      <span style="font-size:12px;font-weight:600;color:#6b7280;margin-right:4px;text-transform:uppercase;letter-spacing:.04em;">{{viewportLabel}}</span>
+      <button onClick="{{goDesktop}}" style="{{viewDesktopStyle}}">Desktop</button>
+      <button onClick="{{goMobile}}" style="{{viewMobileStyle}}">Mobile</button>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;padding:48px 20px 80px;">
+    <div style="width: {{frameWidthPx}}px; max-height: {{frameMaxHeight}}; overflow-y: {{frameOverflow}}; background:#fff; border-radius: {{frameRadius}}; border:1px solid #d9e3f2; box-shadow:0 8px 24px rgba(9,16,27,.10);">
+
+      <sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid #d9e3f2;flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">M</div>
+              <span style="font-weight:600;font-size:15px;color:#09101b;">MIM Student Portal</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <a href="#" onClick="{{goLogin}}" style="font-size:14px;font-weight:500;color:#09101b;text-decoration:none;padding:8px 12px;border-radius:8px;">Log in</a>
+              <a href="#" onClick="{{goRegister}}" style="font-size:14px;font-weight:500;color:#fff;background:#335d99;text-decoration:none;padding:8px 16px;border-radius:8px;">Register</a>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:40px;align-items:center;padding:56px 32px;flex-wrap:wrap;">
+            <div style="flex:1 1 360px;min-width:0;">
+              <span style="display:inline-flex;align-items:center;border-radius:999px;background:#ecf1f9;color:#4075bf;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:16px;">Maharaja Institute of Management</span>
+              <h1 style="font-size:38px;line-height:1.15;font-weight:700;color:#09101b;margin:0 0 16px;letter-spacing:-0.01em;">Find your course. Enrol the same day.</h1>
+              <p style="font-size:15px;line-height:1.7;color:#4075bf;margin:0 0 28px;max-width:480px;">Browse MIM's course offering without contacting staff, then create an account and confirm your place in a single sitting.</p>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <a href="#" onClick="{{goCourse}}" style="display:inline-flex;justify-content:center;padding:12px 22px;border-radius:8px;background:#335d99;color:#fff;font-size:14px;font-weight:600;text-decoration:none;">Browse courses</a>
+                <a href="#" onClick="{{goRegister}}" style="display:inline-flex;justify-content:center;padding:12px 22px;border-radius:8px;border:1px solid #b3c8e6;color:#09101b;font-size:14px;font-weight:600;text-decoration:none;">Create an account</a>
+              </div>
+            </div>
+            <div style="flex:1 1 320px;min-width:0;">
+              <div style="height:260px;border-radius:14px;background-image:repeating-linear-gradient(135deg,#ecf1f9,#ecf1f9 10px,#dce8ef 10px,#dce8ef 20px);display:flex;align-items:center;justify-content:center;border:1px solid #d9e3f2;">
+                <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#4075bf;background:#fff;padding:6px 12px;border-radius:6px;border:1px solid #d9e3f2;">campus photograph</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:24px;padding:8px 32px 56px;flex-wrap:wrap;border-top:1px solid #d9e3f2;">
+            <div style="flex:1 1 220px;min-width:0;padding-top:32px;">
+              <h3 style="font-size:15px;font-weight:600;color:#09101b;margin:0 0 8px;">Browse without an account</h3>
+              <p style="font-size:13px;line-height:1.6;color:#4075bf;margin:0;">See course details, fees and open intakes before you sign up for anything.</p>
+            </div>
+            <div style="flex:1 1 220px;min-width:0;padding-top:32px;">
+              <h3 style="font-size:15px;font-weight:600;color:#09101b;margin:0 0 8px;">Enrol in one sitting</h3>
+              <p style="font-size:13px;line-height:1.6;color:#4075bf;margin:0;">Create an account and confirm your place in the same visit — no waiting on staff.</p>
+            </div>
+            <div style="flex:1 1 220px;min-width:0;padding-top:32px;">
+              <h3 style="font-size:15px;font-weight:600;color:#09101b;margin:0 0 8px;">Guaranteed seats</h3>
+              <p style="font-size:13px;line-height:1.6;color:#4075bf;margin:0;">Capacity is checked the moment you enrol, so a confirmed place is always honoured.</p>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isCourse}}" hint-placeholder-val="{{false}}">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid #d9e3f2;flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">M</div>
+              <span style="font-weight:600;font-size:15px;color:#09101b;">MIM Student Portal</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <a href="#" onClick="{{goLogin}}" style="font-size:14px;font-weight:500;color:#09101b;text-decoration:none;padding:8px 12px;border-radius:8px;">Log in</a>
+              <a href="#" onClick="{{goRegister}}" style="font-size:14px;font-weight:500;color:#fff;background:#335d99;text-decoration:none;padding:8px 16px;border-radius:8px;">Register</a>
+            </div>
+          </div>
+
+          <div style="padding:32px 32px 0;">
+            <p style="font-size:13px;color:#4075bf;margin:0 0 16px;">Catalog / Postgraduate Diploma in Digital Marketing</p>
+            <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+              <span style="display:inline-flex;align-items:center;border-radius:999px;background:#dbf0f0;color:#0f2424;padding:4px 12px;font-size:12px;font-weight:500;">Blended</span>
+              <span style="display:inline-flex;align-items:center;border-radius:999px;background:#ecf1f9;color:#4075bf;padding:4px 12px;font-size:12px;font-weight:500;">PGD-DM-2027</span>
+            </div>
+            <h1 style="font-size:32px;font-weight:700;color:#09101b;margin:0 0 8px;letter-spacing:-0.01em;">Postgraduate Diploma in Digital Marketing</h1>
+            <p style="font-size:14px;color:#4075bf;margin:0 0 32px;">9 months · On-campus and online sessions</p>
+          </div>
+
+          <div style="display:flex;gap:32px;padding:0 32px 48px;flex-wrap:wrap;">
+            <div style="flex:2 1 360px;min-width:0;">
+              <h2 style="font-size:17px;font-weight:600;color:#09101b;margin:0 0 12px;">About this course</h2>
+              <p style="font-size:14px;line-height:1.7;color:#09101b;margin:0 0 12px;">This programme covers digital channel strategy, performance marketing, analytics and brand management, with a project-based capstone in the final term.</p>
+              <p style="font-size:14px;line-height:1.7;color:#09101b;margin:0;">Sessions combine on-campus workshops with online lectures, designed for working professionals balancing study alongside a job.</p>
+
+              <h2 style="font-size:17px;font-weight:600;color:#09101b;margin:32px 0 12px;">Entry requirements</h2>
+              <p style="font-size:14px;line-height:1.7;color:#09101b;margin:0;">A bachelor's degree in any discipline, or an equivalent professional qualification with at least two years of relevant work experience.</p>
+
+              <h2 style="font-size:17px;font-weight:600;color:#09101b;margin:32px 0 12px;">Fees</h2>
+              <p style="font-size:14px;line-height:1.7;color:#09101b;margin:0;">LKR 285,000, payable in three instalments. A detailed fee schedule is provided at enrolment.</p>
+            </div>
+
+            <div style="flex:1 1 280px;min-width:0;">
+              <div style="border:1px solid #d9e3f2;border-radius:12px;padding:20px;">
+                <h3 style="margin:0 0 4px;font-size:15px;font-weight:600;color:#09101b;">Available intakes</h3>
+                <p style="margin:0 0 16px;font-size:12px;color:#4075bf;">Enrolling requires an account</p>
+
+                <div style="padding:16px 0;border-bottom:1px solid #d9e3f2;">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:600;color:#09101b;">March 2027 Intake</span>
+                    <span style="display:inline-flex;align-items:center;border-radius:999px;background:#f9d2d5;color:#88111b;padding:2px 10px;font-size:11px;font-weight:600;white-space:nowrap;">Only 4 places left</span>
+                  </div>
+                  <p style="font-size:13px;color:#4075bf;margin:0 0 12px;">3 Mar 2027 – 5 Dec 2027 · 30 seats</p>
+                  <a href="#" onClick="{{goRegister}}" style="display:inline-flex;justify-content:center;padding:8px 14px;border-radius:8px;background:#335d99;color:#fff;font-size:13px;font-weight:600;text-decoration:none;">Enrol</a>
+                  <p style="font-size:11px;color:#4075bf;margin:6px 0 0;">You'll be asked to sign in or create an account</p>
+                </div>
+
+                <div style="padding:16px 0;border-bottom:1px solid #d9e3f2;">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:600;color:#09101b;">July 2027 Intake</span>
+                    <span style="display:inline-flex;align-items:center;border-radius:999px;background:#4a9e2e;color:#fff;padding:2px 10px;font-size:11px;font-weight:600;white-space:nowrap;">Places available</span>
+                  </div>
+                  <p style="font-size:13px;color:#4075bf;margin:0 0 12px;">6 Jul 2027 – 30 Mar 2028 · 30 seats</p>
+                  <a href="#" onClick="{{goRegister}}" style="display:inline-flex;justify-content:center;padding:8px 14px;border-radius:8px;background:#335d99;color:#fff;font-size:13px;font-weight:600;text-decoration:none;">Enrol</a>
+                  <p style="font-size:11px;color:#4075bf;margin:6px 0 0;">You'll be asked to sign in or create an account</p>
+                </div>
+
+                <div style="padding:16px 0 0;">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:600;color:#09101b;">November 2026 Intake</span>
+                    <span style="display:inline-flex;align-items:center;border-radius:999px;background:#ecf1f9;color:#4075bf;padding:2px 10px;font-size:11px;font-weight:600;white-space:nowrap;">Full</span>
+                  </div>
+                  <p style="font-size:13px;color:#4075bf;margin:0 0 12px;">2 Nov 2026 – 28 Jul 2027 · 30 seats</p>
+                  <span style="display:inline-flex;justify-content:center;padding:8px 14px;border-radius:8px;border:1px solid #b3c8e6;color:#4075bf;font-size:13px;font-weight:600;opacity:.6;cursor:not-allowed;">Full</span>
+                  <p style="font-size:11px;color:#4075bf;margin:6px 0 0;">This intake has no places left.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isRegister}}" hint-placeholder-val="{{false}}">
+        <div style="min-height:600px;background:#ecf1f9;display:flex;align-items:center;justify-content:center;padding:48px 20px;">
+          <div style="width:100%;max-width:440px;background:#fff;border:1px solid #d9e3f2;border-radius:14px;padding:32px;">
+            <div style="display:flex;justify-content:center;margin-bottom:20px;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">M</div>
+            </div>
+            <h1 style="text-align:center;font-size:22px;font-weight:700;color:#09101b;margin:0 0 4px;">Create your account</h1>
+            <p style="text-align:center;font-size:13px;color:#4075bf;margin:0 0 28px;">Browse courses and enrol once you're set up.</p>
+
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Full name</label>
+              <input type="text" placeholder="Jane Perera" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Email</label>
+              <input type="email" placeholder="jane@example.com" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Phone</label>
+              <input type="tel" placeholder="+94 77 123 4567" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+            <div style="margin-bottom:6px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Password</label>
+              <input type="password" placeholder="At least 10 characters" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+            <p style="font-size:12px;color:#4075bf;margin:0 0 16px;">At least 10 characters. No other complexity rules.</p>
+            <div style="margin-bottom:20px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Confirm password</label>
+              <input type="password" placeholder="Re-enter your password" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:8px;margin:0 0 20px;">
+              <input type="checkbox" style="margin-top:3px;width:16px;height:16px;accent-color:#335d99;" />
+              <label style="font-size:13px;color:#09101b;line-height:1.4;">I accept the <a href="#" style="text-decoration:underline;">Terms of Use</a> and <a href="#" style="text-decoration:underline;">Privacy Notice</a></label>
+            </div>
+
+            <div style="border:1px solid #d9e3f2;border-radius:8px;padding:14px;display:flex;align-items:center;gap:10px;margin-bottom:24px;background:#ecf1f9;">
+              <div style="width:20px;height:20px;border:2px solid #b3c8e6;border-radius:4px;background:#fff;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:#4075bf;font-family:ui-monospace,Menlo,monospace;">verification challenge placeholder</span>
+            </div>
+
+            <button onClick="{{goVerify}}" style="width:100%;padding:12px;border:none;border-radius:8px;background:#335d99;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:Roboto,sans-serif;">Create account</button>
+            <p style="text-align:center;font-size:13px;color:#4075bf;margin:20px 0 0;">Already have an account? <a href="#" onClick="{{goLogin}}" style="font-weight:500;text-decoration:none;">Log in</a></p>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isVerify}}" hint-placeholder-val="{{false}}">
+        <div style="min-height:600px;background:#ecf1f9;display:flex;align-items:center;justify-content:center;padding:48px 20px;">
+          <div style="width:100%;max-width:440px;background:#fff;border:1px solid #d9e3f2;border-radius:14px;padding:32px;">
+            <div style="display:flex;justify-content:center;margin-bottom:20px;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">M</div>
+            </div>
+            <h1 style="text-align:center;font-size:22px;font-weight:700;color:#09101b;margin:0 0 20px;">Check your email</h1>
+            <p style="text-align:center;font-size:14px;color:#09101b;line-height:1.6;margin:0 0 4px;">We've sent a verification link to</p>
+            <p style="text-align:center;font-size:14px;font-weight:600;color:#09101b;margin:0 0 24px;">alex.perera@example.com</p>
+            <p style="text-align:center;font-size:13px;color:#4075bf;line-height:1.6;margin:0 0 28px;">Click the link to activate your account. The link expires in 24 hours.</p>
+            <button style="width:100%;padding:12px;border:1px solid #b3c8e6;border-radius:8px;background:#fff;color:#09101b;font-size:14px;font-weight:600;cursor:pointer;font-family:Roboto,sans-serif;">Resend email</button>
+            <p style="text-align:center;font-size:13px;color:#4075bf;margin:20px 0 0;">Wrong address? <a href="#" onClick="{{goRegister}}" style="font-weight:500;text-decoration:none;">Go back</a></p>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isLogin}}" hint-placeholder-val="{{false}}">
+        <div style="min-height:600px;background:#ecf1f9;display:flex;align-items:center;justify-content:center;padding:48px 20px;">
+          <div style="width:100%;max-width:440px;background:#fff;border:1px solid #d9e3f2;border-radius:14px;padding:32px;">
+            <div style="display:flex;justify-content:center;margin-bottom:20px;">
+              <div style="width:40px;height:40px;border-radius:10px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">M</div>
+            </div>
+            <h1 style="text-align:center;font-size:22px;font-weight:700;color:#09101b;margin:0 0 4px;">Log in</h1>
+            <p style="text-align:center;font-size:13px;color:#4075bf;margin:0 0 24px;">Sign in to manage your enrolments.</p>
+
+            <div style="display:flex;gap:8px;border:1px solid rgba(182,22,36,.3);background:rgba(182,22,36,.08);border-radius:8px;padding:12px 14px;margin-bottom:20px;font-size:13px;">
+              <span style="font-weight:600;color:#b61624;">Error</span>
+              <span style="color:#09101b;">Email or password is incorrect.</span>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Email</label>
+              <input type="email" placeholder="jane@example.com" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+            <div style="margin-bottom:16px;">
+              <label style="display:block;font-size:13px;font-weight:500;color:#09101b;margin-bottom:6px;">Password</label>
+              <input type="password" placeholder="Your password" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #b3c8e6;border-radius:8px;font-size:14px;font-family:Roboto,sans-serif;color:#09101b;" />
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button style="position:relative;display:inline-flex;align-items:center;width:36px;height:20px;border-radius:999px;background:#335d99;border:none;cursor:pointer;padding:0;">
+                  <span style="position:absolute;left:18px;top:2px;width:16px;height:16px;border-radius:999px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);"></span>
+                </button>
+                <span style="font-size:13px;color:#09101b;">Remember me</span>
+              </div>
+              <a href="#" style="font-size:13px;font-weight:500;text-decoration:none;">Forgot password?</a>
+            </div>
+
+            <button style="width:100%;padding:12px;border:none;border-radius:8px;background:#335d99;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:Roboto,sans-serif;">Log in</button>
+            <p style="text-align:center;font-size:13px;color:#4075bf;margin:20px 0 0;">New to MIM? <a href="#" onClick="{{goRegister}}" style="font-weight:500;text-decoration:none;">Create an account</a></p>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isDashboard}}" hint-placeholder-val="{{false}}">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid #d9e3f2;flex-wrap:wrap;gap:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:#335d99;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">M</div>
+              <span style="font-weight:600;font-size:15px;color:#09101b;">MIM Student Portal</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:28px;height:28px;border-radius:999px;background:#3e6f8e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">AP</div>
+                <span style="font-size:13px;font-weight:500;color:#09101b;">Alex Perera</span>
+              </div>
+              <a href="#" onClick="{{goCourse}}" style="font-size:13px;font-weight:500;color:#4075bf;text-decoration:none;">Log out</a>
+            </div>
+          </div>
+
+          <div style="padding:32px;max-width:760px;">
+            <h1 style="font-size:24px;font-weight:700;color:#09101b;margin:0 0 4px;">Welcome back, Alex</h1>
+            <p style="font-size:13px;color:#4075bf;margin:0 0 24px;">Student reference · MIM-2026-00042</p>
+
+            <div style="display:flex;gap:8px;border:1px solid rgba(62,111,142,.3);background:rgba(62,111,142,.08);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:13px;align-items:baseline;flex-wrap:wrap;">
+              <span style="font-weight:600;color:#3e6f8e;">Verify your email</span>
+              <span style="color:#09101b;">You can browse the catalog, but enrolling needs a verified address.</span>
+              <a href="#" style="font-size:13px;font-weight:500;text-decoration:none;margin-left:auto;">Resend email</a>
+            </div>
+
+            <div style="display:flex;gap:8px;border:1px solid #d9e3f2;background:#ecf1f9;border-radius:8px;padding:12px 14px;margin-bottom:32px;font-size:13px;align-items:baseline;flex-wrap:wrap;">
+              <span style="font-weight:600;color:#09101b;">Complete your profile</span>
+              <span style="color:#4075bf;">Missing: date of birth, address.</span>
+              <a href="#" style="font-size:13px;font-weight:500;text-decoration:none;margin-left:auto;">Complete profile</a>
+            </div>
+
+            <h2 style="font-size:16px;font-weight:600;color:#09101b;margin:0 0 12px;">Your enrolments</h2>
+            <div style="border:1px solid #d9e3f2;border-radius:12px;overflow:hidden;margin-bottom:32px;">
+              <div style="padding:16px 20px;border-bottom:1px solid #d9e3f2;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+                <div>
+                  <p style="font-size:14px;font-weight:600;color:#09101b;margin:0 0 2px;">Postgraduate Diploma in Digital Marketing <span style="color:#4075bf;font-weight:400;">· PGD-DM-2027</span></p>
+                  <p style="font-size:13px;color:#4075bf;margin:0;">March 2027 Intake · starts 3 Mar 2027</p>
+                </div>
+                <span style="display:inline-flex;align-items:center;border-radius:999px;background:#4a9e2e;color:#fff;padding:2px 10px;font-size:11px;font-weight:600;white-space:nowrap;">Active</span>
+              </div>
+              <div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+                <div>
+                  <p style="font-size:14px;font-weight:600;color:#09101b;margin:0 0 2px;">Certificate in Digital Marketing <span style="color:#4075bf;font-weight:400;">· CDM-2026</span></p>
+                  <p style="font-size:13px;color:#4075bf;margin:0;">March 2026 Intake · withdrawn 2 Mar 2026</p>
+                </div>
+                <span style="display:inline-flex;align-items:center;border-radius:999px;background:#ecf1f9;color:#4075bf;padding:2px 10px;font-size:11px;font-weight:600;white-space:nowrap;">Withdrawn</span>
+              </div>
+            </div>
+
+            <a href="#" onClick="{{goCourse}}" style="display:inline-flex;justify-content:center;padding:10px 18px;border-radius:8px;border:1px solid #b3c8e6;color:#09101b;font-size:13px;font-weight:600;text-decoration:none;">Browse the catalog</a>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'home', viewport: 'desktop' };
+
+  tabStyle(active) {
+    const base = 'padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid transparent;cursor:pointer;font-family:Roboto,sans-serif;';
+    return base + (active ? 'background:#09101b;color:#fff;' : 'background:transparent;color:#4b5563;');
+  }
+  viewBtnStyle(active) {
+    const base = 'padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid #dcdfe3;cursor:pointer;font-family:Roboto,sans-serif;';
+    return base + (active ? 'background:#335d99;color:#fff;border-color:#335d99;' : 'background:#fff;color:#4b5563;');
+  }
+
+  renderVals() {
+    const s = this.state.screen, v = this.state.viewport;
+    return {
+      isHome: s === 'home', isCourse: s === 'course', isRegister: s === 'register', isVerify: s === 'verify', isLogin: s === 'login', isDashboard: s === 'dashboard',
+      frameWidthPx: v === 'mobile' ? 390 : 1440,
+      frameMaxHeight: v === 'mobile' ? '844px' : 'none',
+      frameOverflow: v === 'mobile' ? 'auto' : 'visible',
+      frameRadius: v === 'mobile' ? '32px' : '16px',
+      viewportLabel: v === 'mobile' ? 'Mobile · 390px' : 'Desktop · 1440px',
+      goHome: () => this.setState({ screen: 'home' }),
+      goCourse: () => this.setState({ screen: 'course' }),
+      goRegister: () => this.setState({ screen: 'register' }),
+      goVerify: () => this.setState({ screen: 'verify' }),
+      goLogin: () => this.setState({ screen: 'login' }),
+      goDashboard: () => this.setState({ screen: 'dashboard' }),
+      goDesktop: () => this.setState({ viewport: 'desktop' }),
+      goMobile: () => this.setState({ viewport: 'mobile' }),
+      tabHomeStyle: this.tabStyle(s === 'home'),
+      tabCourseStyle: this.tabStyle(s === 'course'),
+      tabRegisterStyle: this.tabStyle(s === 'register'),
+      tabVerifyStyle: this.tabStyle(s === 'verify'),
+      tabLoginStyle: this.tabStyle(s === 'login'),
+      tabDashboardStyle: this.tabStyle(s === 'dashboard'),
+      viewDesktopStyle: this.viewBtnStyle(v === 'desktop'),
+      viewMobileStyle: this.viewBtnStyle(v === 'mobile'),
+    };
+  }
+}
+</script>
+</body>
+</html>

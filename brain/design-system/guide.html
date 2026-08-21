@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MIM Design System — Component Guide</title>
+
+<link rel="stylesheet" href="base.css" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Roboto', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        },
+        colors: {
+          background: 'var(--background)',
+          foreground: 'var(--foreground)',
+          card: { DEFAULT: 'var(--card)', foreground: 'var(--card-foreground)' },
+          popover: { DEFAULT: 'var(--popover)', foreground: 'var(--popover-foreground)' },
+          primary: { DEFAULT: 'var(--primary)', foreground: 'var(--primary-foreground)' },
+          secondary: { DEFAULT: 'var(--secondary)', foreground: 'var(--secondary-foreground)' },
+          muted: { DEFAULT: 'var(--muted)', foreground: 'var(--muted-foreground)' },
+          accent: { DEFAULT: 'var(--accent)', foreground: 'var(--accent-foreground)' },
+          destructive: { DEFAULT: 'var(--destructive)', foreground: 'var(--destructive-foreground)' },
+          success: { DEFAULT: 'var(--success)', foreground: 'var(--success-foreground)' },
+          info: { DEFAULT: 'var(--info)', foreground: 'var(--info-foreground)' },
+          border: 'var(--border)',
+          input: 'var(--input)',
+          ring: 'var(--ring)',
+          'punch-red': {
+            50: 'var(--color-punch-red-50)', 100: 'var(--color-punch-red-100)', 200: 'var(--color-punch-red-200)',
+            300: 'var(--color-punch-red-300)', 400: 'var(--color-punch-red-400)', 500: 'var(--color-punch-red-500)',
+            600: 'var(--color-punch-red-600)', 700: 'var(--color-punch-red-700)', 800: 'var(--color-punch-red-800)',
+            900: 'var(--color-punch-red-900)', 950: 'var(--color-punch-red-950)',
+          },
+          honeydew: {
+            50: 'var(--color-honeydew-50)', 100: 'var(--color-honeydew-100)', 200: 'var(--color-honeydew-200)',
+            300: 'var(--color-honeydew-300)', 400: 'var(--color-honeydew-400)', 500: 'var(--color-honeydew-500)',
+            600: 'var(--color-honeydew-600)', 700: 'var(--color-honeydew-700)', 800: 'var(--color-honeydew-800)',
+            900: 'var(--color-honeydew-900)', 950: 'var(--color-honeydew-950)',
+          },
+          'frosted-blue': {
+            50: 'var(--color-frosted-blue-50)', 100: 'var(--color-frosted-blue-100)', 200: 'var(--color-frosted-blue-200)',
+            300: 'var(--color-frosted-blue-300)', 400: 'var(--color-frosted-blue-400)', 500: 'var(--color-frosted-blue-500)',
+            600: 'var(--color-frosted-blue-600)', 700: 'var(--color-frosted-blue-700)', 800: 'var(--color-frosted-blue-800)',
+            900: 'var(--color-frosted-blue-900)', 950: 'var(--color-frosted-blue-950)',
+          },
+          cerulean: {
+            50: 'var(--color-cerulean-50)', 100: 'var(--color-cerulean-100)', 200: 'var(--color-cerulean-200)',
+            300: 'var(--color-cerulean-300)', 400: 'var(--color-cerulean-400)', 500: 'var(--color-cerulean-500)',
+            600: 'var(--color-cerulean-600)', 700: 'var(--color-cerulean-700)', 800: 'var(--color-cerulean-800)',
+            900: 'var(--color-cerulean-900)', 950: 'var(--color-cerulean-950)',
+          },
+          'oxford-navy': {
+            50: 'var(--color-oxford-navy-50)', 100: 'var(--color-oxford-navy-100)', 200: 'var(--color-oxford-navy-200)',
+            300: 'var(--color-oxford-navy-300)', 400: 'var(--color-oxford-navy-400)', 500: 'var(--color-oxford-navy-500)',
+            600: 'var(--color-oxford-navy-600)', 700: 'var(--color-oxford-navy-700)', 800: 'var(--color-oxford-navy-800)',
+            900: 'var(--color-oxford-navy-900)', 950: 'var(--color-oxford-navy-950)',
+          },
+        },
+        borderRadius: {
+          sm: 'calc(var(--radius) - 4px)',
+          md: 'calc(var(--radius) - 2px)',
+          lg: 'var(--radius)',
+          xl: 'calc(var(--radius) + 4px)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  .anchor-target { scroll-margin-top: 5.5rem; }
+  .nav-link.is-active { background-color: var(--accent); color: var(--accent-foreground); font-weight: 500; }
+  .focus-ring:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .swatch { box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06); }
+</style>
+</head>
+
+<body class="font-sans bg-background text-foreground antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
+    <div class="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold">M</div>
+        <div class="leading-tight">
+          <p class="text-sm font-semibold">MIM Design System</p>
+          <p class="text-xs text-muted-foreground">Student Portal · component guide</p>
+        </div>
+      </div>
+      <span class="rounded-full border border-border bg-muted px-3 py-1 text-xs text-muted-foreground">Roboto · Tailwind · shadcn tokens</span>
+    </div>
+  </header>
+
+  <!-- Two column layout -->
+  <div class="mx-auto grid max-w-[1400px] grid-cols-1 md:grid-cols-[220px_1fr]">
+
+    <!-- Left: sidebar navigation -->
+    <aside class="sticky top-16 hidden h-[calc(100vh-4rem)] shrink-0 overflow-y-auto border-r border-border px-4 py-6 md:block">
+      <nav id="side-nav" class="flex flex-col gap-1 text-sm">
+        <p class="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Foundations</p>
+        <a href="#colors" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Colors</a>
+        <a href="#typography" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Typography</a>
+        <a href="#spacing-radius" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Radius &amp; elevation</a>
+
+        <p class="px-3 pb-2 pt-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Components</p>
+        <a href="#buttons" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Buttons</a>
+        <a href="#badges" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Badges</a>
+        <a href="#forms" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Forms &amp; inputs</a>
+        <a href="#cards" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Cards</a>
+        <a href="#alerts" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Alerts</a>
+        <a href="#avatars" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Avatars</a>
+        <a href="#tabs" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Tabs</a>
+        <a href="#tables" class="nav-link rounded-md px-3 py-1.5 text-foreground/80 hover:bg-muted">Tables</a>
+      </nav>
+    </aside>
+
+    <!-- Right: content -->
+    <main class="min-w-0 px-6 py-10 md:px-10">
+
+      <!-- Intro -->
+      <section class="anchor-target mb-14">
+        <h1 class="text-3xl font-bold tracking-tight">MIM Student Portal Design System</h1>
+        <p class="mt-2 max-w-2xl text-muted-foreground">
+          Visual reference for every foundation and component token defined in
+          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">base.css</code>. Built with Tailwind CSS utility classes and
+          shadcn/ui's component conventions, on the light theme.
+        </p>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Colors</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Semantic tokens first, brand scales below.</p>
+
+        <h3 class="mt-6 text-sm font-medium text-muted-foreground">Semantic tokens</h3>
+        <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-background"></div>
+            <p class="mt-2 text-xs font-medium">Background</p>
+            <p class="text-xs text-muted-foreground">--background</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-primary"></div>
+            <p class="mt-2 text-xs font-medium">Primary</p>
+            <p class="text-xs text-muted-foreground">--primary</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-secondary"></div>
+            <p class="mt-2 text-xs font-medium">Secondary</p>
+            <p class="text-xs text-muted-foreground">--secondary</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-muted"></div>
+            <p class="mt-2 text-xs font-medium">Muted</p>
+            <p class="text-xs text-muted-foreground">--muted</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-accent"></div>
+            <p class="mt-2 text-xs font-medium">Accent</p>
+            <p class="text-xs text-muted-foreground">--accent</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-destructive"></div>
+            <p class="mt-2 text-xs font-medium">Destructive</p>
+            <p class="text-xs text-muted-foreground">--destructive</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-success"></div>
+            <p class="mt-2 text-xs font-medium">Success</p>
+            <p class="text-xs text-muted-foreground">--success</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-info"></div>
+            <p class="mt-2 text-xs font-medium">Info</p>
+            <p class="text-xs text-muted-foreground">--info</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md bg-card"></div>
+            <p class="mt-2 text-xs font-medium">Card</p>
+            <p class="text-xs text-muted-foreground">--card</p>
+          </div>
+          <div class="rounded-lg border border-border p-3">
+            <div class="swatch h-14 rounded-md border-2" style="border-color: var(--border)"></div>
+            <p class="mt-2 text-xs font-medium">Border</p>
+            <p class="text-xs text-muted-foreground">--border</p>
+          </div>
+        </div>
+
+        <h3 class="mt-10 text-sm font-medium text-muted-foreground">Brand scales</h3>
+        <div id="brand-scales" class="mt-3 flex flex-col gap-5"></div>
+      </section>
+
+      <!-- Typography -->
+      <section id="typography" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Typography</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Roboto, loaded from Google Fonts — <code class="rounded bg-muted px-1.5 py-0.5 text-xs">fonts.google.com/specimen/Roboto</code>.</p>
+
+        <div class="mt-6 rounded-lg border border-border p-6">
+          <h1 class="text-4xl font-bold tracking-tight">H1 · The quick brown fox</h1>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight">H2 · The quick brown fox</h2>
+          <h3 class="mt-3 text-2xl font-semibold">H3 · The quick brown fox</h3>
+          <h4 class="mt-3 text-xl font-semibold">H4 · The quick brown fox</h4>
+          <h5 class="mt-3 text-lg font-medium">H5 · The quick brown fox</h5>
+          <h6 class="mt-3 text-base font-medium">H6 · The quick brown fox</h6>
+          <p class="mt-4 text-base leading-relaxed">
+            Body text. Batches open for enrolment appear in the public catalog the moment a course is published,
+            with capacity enforced atomically so no batch is ever over-subscribed.
+          </p>
+          <p class="mt-2 text-sm text-muted-foreground">Muted / helper text — used for captions, hints and secondary metadata.</p>
+          <p class="mt-2 text-xs text-muted-foreground">Extra small — timestamps, footnotes.</p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-light">Light 300</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-light</p>
+          </div>
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-normal">Regular 400</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-normal</p>
+          </div>
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-medium">Medium 500</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-medium</p>
+          </div>
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-semibold">Semibold 600</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-semibold</p>
+          </div>
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-bold">Bold 700</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-bold</p>
+          </div>
+          <div class="rounded-lg border border-border p-3 text-center">
+            <p class="text-lg font-black">Black 900</p>
+            <p class="mt-1 text-xs text-muted-foreground">font-black</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Radius / elevation -->
+      <section id="spacing-radius" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Radius &amp; elevation</h2>
+        <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div class="flex flex-col items-center gap-2">
+            <div class="h-16 w-16 rounded-sm border border-border bg-muted"></div>
+            <p class="text-xs text-muted-foreground">sm</p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="h-16 w-16 rounded-md border border-border bg-muted"></div>
+            <p class="text-xs text-muted-foreground">md</p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="h-16 w-16 rounded-lg border border-border bg-muted"></div>
+            <p class="text-xs text-muted-foreground">lg (--radius)</p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="h-16 w-16 rounded-xl border border-border bg-muted"></div>
+            <p class="text-xs text-muted-foreground">xl</p>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-4">
+          <div class="rounded-lg bg-card p-4 shadow-sm">shadow-sm</div>
+          <div class="rounded-lg bg-card p-4 shadow-md">shadow-md</div>
+          <div class="rounded-lg bg-card p-4 shadow-lg">shadow-lg</div>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section id="buttons" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Buttons</h2>
+
+        <h3 class="mt-6 text-sm font-medium text-muted-foreground">Variants</h3>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:opacity-90">Primary</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md bg-secondary px-4 text-sm font-medium text-secondary-foreground shadow-sm transition-colors hover:opacity-90">Secondary</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md bg-destructive px-4 text-sm font-medium text-destructive-foreground shadow-sm transition-colors hover:opacity-90">Destructive</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 text-sm font-medium transition-colors hover:bg-muted">Outline</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium transition-colors hover:bg-muted">Ghost</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md px-1 text-sm font-medium text-primary underline-offset-4 transition-colors hover:underline">Link</button>
+          <button disabled class="inline-flex h-9 cursor-not-allowed items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground opacity-50">Disabled</button>
+        </div>
+
+        <h3 class="mt-8 text-sm font-medium text-muted-foreground">Sizes</h3>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+          <button class="focus-ring inline-flex h-8 items-center justify-center rounded-md bg-primary px-3 text-xs font-medium text-primary-foreground shadow-sm">Small</button>
+          <button class="focus-ring inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm">Default</button>
+          <button class="focus-ring inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-base font-medium text-primary-foreground shadow-sm">Large</button>
+          <button class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm" aria-label="Icon button">+</button>
+        </div>
+      </section>
+
+      <!-- Badges -->
+      <section id="badges" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Badges</h2>
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-primary-foreground">Default</span>
+          <span class="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">Secondary</span>
+          <span class="inline-flex items-center rounded-full bg-destructive px-2.5 py-0.5 text-xs font-medium text-destructive-foreground">Destructive</span>
+          <span class="inline-flex items-center rounded-full bg-success px-2.5 py-0.5 text-xs font-medium text-success-foreground">Success</span>
+          <span class="inline-flex items-center rounded-full bg-info px-2.5 py-0.5 text-xs font-medium text-info-foreground">Info</span>
+          <span class="inline-flex items-center rounded-full border border-input px-2.5 py-0.5 text-xs font-medium">Outline</span>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <span>Example: seat-availability indicator (AC-3.1.4)</span>
+        </div>
+        <div class="mt-2 flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center rounded-full bg-success px-2.5 py-0.5 text-xs font-medium text-success-foreground">Places available</span>
+          <span class="inline-flex items-center rounded-full bg-punch-red-100 px-2.5 py-0.5 text-xs font-medium text-punch-red-700">Only 3 places left</span>
+          <span class="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Full</span>
+        </div>
+      </section>
+
+      <!-- Forms -->
+      <section id="forms" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Forms &amp; inputs</h2>
+        <div class="mt-4 grid max-w-xl gap-5">
+          <div>
+            <label class="mb-1.5 block text-sm font-medium" for="g-name">Full name</label>
+            <input id="g-name" type="text" placeholder="Jane Perera"
+              class="focus-ring block w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground" />
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-medium" for="g-email">Email</label>
+            <input id="g-email" type="email" value="not-an-email"
+              class="focus-ring block w-full rounded-md border border-destructive bg-background px-3 py-2 text-sm" aria-invalid="true" aria-describedby="g-email-error" />
+            <p id="g-email-error" class="mt-1.5 text-xs text-destructive">Enter a valid email address.</p>
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-medium" for="g-bio">About</label>
+            <textarea id="g-bio" rows="3" placeholder="Tell us about yourself"
+              class="focus-ring block w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground"></textarea>
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-medium" for="g-mode">Delivery mode</label>
+            <select id="g-mode" class="focus-ring block w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+              <option>On campus</option>
+              <option>Online</option>
+              <option>Blended</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2">
+            <input id="g-check" type="checkbox" class="focus-ring h-4 w-4 rounded border-input text-primary" />
+            <label for="g-check" class="text-sm">I accept the Terms of Use and Privacy Notice</label>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="g-radio" class="focus-ring h-4 w-4 border-input text-primary" checked /> On campus</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="g-radio" class="focus-ring h-4 w-4 border-input text-primary" /> Online</label>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" aria-pressed="true" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+              <span class="inline-block h-5 w-5 translate-x-5 rounded-full bg-background shadow transition-transform"></span>
+            </button>
+            <span class="text-sm">Remember me</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards -->
+      <section id="cards" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Cards</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="border-b border-border p-5">
+              <h3 class="text-base font-semibold">Diploma in Business Management</h3>
+              <p class="mt-1 text-sm text-muted-foreground">DBM-2027 · On campus · 12 months</p>
+            </div>
+            <div class="p-5 text-sm">
+              A foundational programme covering management principles, finance and operations for early-career professionals.
+            </div>
+            <div class="flex items-center justify-between border-t border-border p-5">
+              <span class="inline-flex items-center rounded-full bg-success px-2.5 py-0.5 text-xs font-medium text-success-foreground">Places available</span>
+              <button class="focus-ring inline-flex h-8 items-center justify-center rounded-md bg-primary px-3 text-xs font-medium text-primary-foreground">View details</button>
+            </div>
+          </div>
+          <div class="rounded-lg border border-border bg-card p-5 text-card-foreground shadow-sm">
+            <h3 class="text-base font-semibold">Simple card</h3>
+            <p class="mt-1 text-sm text-muted-foreground">No header/footer separators — used for compact summary tiles like the dashboard.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alerts -->
+      <section id="alerts" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Alerts</h2>
+        <div class="mt-4 flex flex-col gap-3">
+          <div class="flex gap-3 rounded-lg border border-border bg-muted p-4 text-sm">
+            <span class="font-semibold">Note</span>
+            <span class="text-muted-foreground">General information for the student, e.g. a policy reminder.</span>
+          </div>
+          <div class="flex gap-3 rounded-lg border border-info/30 bg-info/10 p-4 text-sm">
+            <span class="font-semibold text-info">Info</span>
+            <span>Your session will expire after 24 hours of inactivity.</span>
+          </div>
+          <div class="flex gap-3 rounded-lg border border-success/30 bg-success/10 p-4 text-sm">
+            <span class="font-semibold text-success">Success</span>
+            <span>Enrolment confirmed — a confirmation email is on its way.</span>
+          </div>
+          <div class="flex gap-3 rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm">
+            <span class="font-semibold text-destructive">Error</span>
+            <span>This batch is now full. Choose another intake to continue.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Avatars -->
+      <section id="avatars" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Avatars</h2>
+        <div class="mt-4 flex items-end gap-4">
+          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-oxford-navy-600 text-xs font-medium text-white">JP</div>
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-cerulean-600 text-sm font-medium text-white">JP</div>
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-frosted-blue-600 text-base font-medium text-white">JP</div>
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-honeydew-600 text-lg font-medium text-white">JP</div>
+        </div>
+      </section>
+
+      <!-- Tabs -->
+      <section id="tabs" class="anchor-target mb-16">
+        <h2 class="text-xl font-semibold">Tabs</h2>
+        <div class="mt-4 max-w-xl">
+          <div class="inline-flex rounded-md border border-border bg-muted p-1 text-sm" role="tablist">
+            <button type="button" data-tab="active" class="tab-trigger rounded-sm px-3 py-1.5 font-medium bg-background shadow-sm">Active enrolments</button>
+            <button type="button" data-tab="withdrawn" class="tab-trigger rounded-sm px-3 py-1.5 font-medium text-muted-foreground">Withdrawn</button>
+          </div>
+          <div data-tab-panel="active" class="mt-4 rounded-lg border border-border p-4 text-sm">You have 2 active enrolments.</div>
+          <div data-tab-panel="withdrawn" class="mt-4 hidden rounded-lg border border-border p-4 text-sm">No withdrawn enrolments.</div>
+        </div>
+      </section>
+
+      <!-- Tables -->
+      <section id="tables" class="anchor-target mb-24">
+        <h2 class="text-xl font-semibold">Tables</h2>
+        <div class="mt-4 overflow-x-auto rounded-lg border border-border">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-muted text-xs uppercase text-muted-foreground">
+              <tr>
+                <th class="px-4 py-3 font-medium">Course</th>
+                <th class="px-4 py-3 font-medium">Batch</th>
+                <th class="px-4 py-3 font-medium">Status</th>
+                <th class="px-4 py-3 font-medium">Enrolled</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr>
+                <td class="px-4 py-3">Diploma in Business Management</td>
+                <td class="px-4 py-3">January 2027 Intake</td>
+                <td class="px-4 py-3"><span class="inline-flex items-center rounded-full bg-success px-2.5 py-0.5 text-xs font-medium text-success-foreground">Active</span></td>
+                <td class="px-4 py-3 text-muted-foreground">15 Jan 2027</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3">Certificate in Digital Marketing</td>
+                <td class="px-4 py-3">March 2026 Intake</td>
+                <td class="px-4 py-3"><span class="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Withdrawn</span></td>
+                <td class="px-4 py-3 text-muted-foreground">02 Mar 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Render brand color scales programmatically to keep the source list DRY.
+    const scales = {
+      'punch-red': 'Punch Red',
+      'honeydew': 'Honeydew',
+      'frosted-blue': 'Frosted Blue',
+      'cerulean': 'Cerulean',
+      'oxford-navy': 'Oxford Navy',
+    };
+    const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+    const container = document.getElementById('brand-scales');
+    Object.entries(scales).forEach(([slug, label]) => {
+      const row = document.createElement('div');
+      row.innerHTML = `
+        <p class="mb-2 text-xs font-medium">${label}</p>
+        <div class="grid grid-cols-11 gap-1.5">
+          ${steps.map(step => `
+            <div class="flex flex-col items-center gap-1">
+              <div class="swatch h-10 w-full rounded-md" style="background-color: var(--color-${slug}-${step})"></div>
+              <span class="text-[10px] text-muted-foreground">${step}</span>
+            </div>
+          `).join('')}
+        </div>`;
+      container.appendChild(row);
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('bg-background', 'shadow-sm'));
+        document.querySelectorAll('.tab-trigger').forEach(b => b.classList.add('text-muted-foreground'));
+        btn.classList.add('bg-background', 'shadow-sm');
+        btn.classList.remove('text-muted-foreground');
+        document.querySelectorAll('[data-tab-panel]').forEach(p => p.classList.add('hidden'));
+        document.querySelector(`[data-tab-panel="${btn.dataset.tab}"]`).classList.remove('hidden');
+      });
+    });
+
+    // Active nav link on scroll
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const links = [...document.querySelectorAll('#side-nav a')];
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('is-active'));
+          const link = document.querySelector(`#side-nav a[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
