@@ -35,6 +35,10 @@ public class EmailQueueBackgroundService(
                 logger.LogWarning(ex, "Email send attempt {Attempt} failed for {To}, retrying", attempt, message.To);
                 await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt)), stoppingToken);
             }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Email send failed for {To} after {MaxAttempts} attempts, giving up", message.To, MaxAttempts);
+            }
         }
     }
 }
