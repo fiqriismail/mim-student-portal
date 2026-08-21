@@ -13,6 +13,12 @@ Root navigation for this project's knowledge base. Update this file whenever a d
 - [`design-system/guide.html`](design-system/guide.html) — visual component guide (two-column layout) for every token and component in `base.css`. Open directly in a browser.
 - [`design-system/mokups/MIM Student Portal Mockups.dc.html`](design-system/mokups/MIM%20Student%20Portal%20Mockups.dc.html) — interactive Phase 1 screen mockups (Home, Course detail, Register, Check email, Login, Dashboard) with a desktop/mobile viewport toggle. Uses the same Roboto + Oxford Navy palette as `base.css`, styled inline rather than via the token file.
 
+## Stories
+
+- [`stories/`](stories/README.md) — Phase 1 delivery stories, one per PRD user story per layer it touches.
+  - [`stories/backend/STORYBOARD.md`](stories/backend/STORYBOARD.md) — 24 backend stories (`BE-*`)
+  - [`stories/frontend/STORYBOARD.md`](stories/frontend/STORYBOARD.md) — 19 frontend stories (`FE-*`)
+
 ## Daily notes
 
 - [`daily-notes/`](daily-notes/) — one file per day worked, named `dd-mm-yyyy.md`, logging what was completed.
